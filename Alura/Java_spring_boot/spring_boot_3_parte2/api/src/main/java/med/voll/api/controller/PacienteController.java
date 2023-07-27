@@ -1,7 +1,7 @@
 package med.voll.api.controller;
 
 import jakarta.validation.Valid;
-import med.voll.api.paciente.*;
+import med.voll.api.domain.paciente.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +23,7 @@ public class PacienteController {
         var paciente = new Paciente(dados);
         repository.save(paciente);
 
-        var uri = uriBuilder.path("/medicos/${id}").buildAndExpand(paciente.getId()).toUri();
+        var uri = uriBuilder.path("/pacientes/{id}").buildAndExpand(paciente.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new DadosDetalhamentoPaciente(paciente));
     }
