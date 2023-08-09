@@ -41,6 +41,7 @@ public class SecurityConfigurations {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(ahr -> {
                     ahr.requestMatchers(HttpMethod.POST, "login").permitAll();
+                    ahr.requestMatchers( "/v3/api-docs/**","/swagger-ui.html", "/swagger-ui/**").permitAll();
                     ahr.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
